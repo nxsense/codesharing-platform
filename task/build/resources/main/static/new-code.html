@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="content">
+    <p>Write your code here</p>
+    <div id="editor"><label><textarea id="code_snippet"></textarea></label> <!-- textarea tag is necessary for tests -->
+    </div>
+    <button id="send_snippet" type="submit" onclick="send()">Submit</button>
+</div>
+
+<script src="script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.5/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    let editor = ace.edit("editor");
+
+    editor.setOptions({
+        autoScrollEditorIntoView: true,
+        theme: "ace/theme/chrome",
+        mode: "ace/mode/java",
+        readOnly: false
+    });
+</script>
+
+</body>
+</html>
