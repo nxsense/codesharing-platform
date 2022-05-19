@@ -1,7 +1,6 @@
 function send() {
-    const editor = ace.edit("editor");
-    const object = {
-        "code": editor.getValue()
+    let object = {
+        "code": document.getElementById("code_snippet").value
     };
 
     let json = JSON.stringify(object);

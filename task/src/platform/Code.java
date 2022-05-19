@@ -1,32 +1,43 @@
 package platform;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.stereotype.Component;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Component
+@Entity
 public class Code {
-    @JsonProperty("code")
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String code;
+    //@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss");
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    private LocalDateTime date;
 
-    @JsonIgnore
-    private LocalDateTime dateTime;
-
-    public Code() {
-        this.code = "public static void main(String[] args) {\n" +
-                "    SpringApplication.run(CodeSharingPlatform.class, args);\n" +
-                "}";
-        this.dateTime = LocalDateTime.now();
+    public Code(String code) {
+        this.code = code;
+        this.date = LocalDateTime.now();
     }
 
-    @JsonProperty("date")
-    public String dateTimeToString(){
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(dateTime);
+    public Code(LocalDateTime date) {
+        this.date = LocalDateTime.now();
+    }
+
+    @JsonIgnore
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCode() {
@@ -37,11 +48,11 @@ public class Code {
         this.code = code;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDateTime getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }
